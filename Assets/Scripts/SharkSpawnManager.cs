@@ -9,6 +9,7 @@ public class SharkSpawnManager : MonoBehaviour
     public float spawnPosZ = 20;
     public float startDelay = 2;
     public float spawnInterval = 1.5f;
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,12 @@ public class SharkSpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //stops spawning once player object is destroyed
+        if (player == null)
+        {
+            CancelInvoke("SpawnShark");
+        }
+
     }
     //funtion that randomizes spawn placement of sharks
     void SpawnShark()

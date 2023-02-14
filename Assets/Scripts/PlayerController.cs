@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 10.0f;
     public float xRange = 10;
     public float zRange = 5;
+    private int collision = 0; 
     // Start is called before the first frame update
     void Start()
     {
@@ -29,5 +30,18 @@ public class PlayerController : MonoBehaviour
         //moves the player object left or right
         horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        collision += 1;
+        if (collision > 2) 
+        {
+            
+          Destroy(gameObject);
+
+            
+        }
+        
+
     }
 }
