@@ -10,11 +10,12 @@ public class SharkSpawnManager : MonoBehaviour
     public float startDelay = 2;
     public float spawnInterval = 1.5f;
     public GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
         // spawns shark at time interval set by variables
-        InvokeRepeating("SpawnShark", startDelay, spawnInterval);
+        StartSpawning();
     }
 
     // Update is called once per frame
@@ -23,7 +24,7 @@ public class SharkSpawnManager : MonoBehaviour
         //stops spawning once player object is destroyed
         if (player == null)
         {
-            CancelInvoke("SpawnShark");
+            StopSpawning();
         }
 
     }
@@ -34,5 +35,16 @@ public class SharkSpawnManager : MonoBehaviour
         Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0, spawnPosZ);
 
         Instantiate(sharkPrefabs[sharkIndex], spawnPos, sharkPrefabs[sharkIndex].transform.rotation);
+    }
+
+    public void StartSpawning()
+    {
+        InvokeRepeating("SpawnShark", startDelay, spawnInterval);
+
+    }
+
+    public void StopSpawning()
+    {
+        CancelInvoke("SpawnShark");
     }
 }
