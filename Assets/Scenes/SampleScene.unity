@@ -368,6 +368,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1809526587}
+--- !u!23 &1401550546 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2929640277652407947, guid: 1328875ae350248458b6b413ebe8087b, type: 3}
+  m_PrefabInstance: {fileID: 1503837295}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1503837295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -507,6 +512,7 @@ MonoBehaviour:
   speed: 10
   xRange: 10
   zRange: 5
+  hitscan: {fileID: 1401550546}
 --- !u!65 &1809526590
 BoxCollider:
   m_ObjectHideFlags: 0

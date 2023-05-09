@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour
     public float speed = 10.0f;
     public float xRange = 10;
     public float zRange = 5;
-    private int collision = 0; 
+    private int health = 3;
+    public Renderer hitscan;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,9 +34,12 @@ public class PlayerController : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        collision += 1;
-        if (collision > 2) 
+        health -= 1;
+        StartCoroutine(HealthBlink());
+        if (health < 1) 
         {
+            
+
             
           Destroy(gameObject);
 
@@ -44,4 +48,16 @@ public class PlayerController : MonoBehaviour
         
 
     }
+
+    IEnumerator HealthBlink()
+    {
+        //Change to new material
+        hitscan.material.color = Color.red;
+        //wait for seconds
+        yield return new WaitForSeconds(0.5f);
+
+        //change back to og material
+        hitscan.material.color = Color.white;
+    }
+
 }

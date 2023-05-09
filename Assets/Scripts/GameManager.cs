@@ -37,10 +37,17 @@ public class GameManager : MonoBehaviour
         spawner.StopSpawning();
         levels++;
         Debug.Log("level " + levels);
-        yield return new WaitForSeconds(2);
+        SharkForward[] sharks = GameObject.FindObjectsOfType<SharkForward>();
+        for (int i = 0; i < sharks.Length; i++)
+        {
+            sharks[i].Deletion();
+        }
+        
         sharksRequirement = sharkPast + sharksRequirement + levels * 5;
         speed = speed + 5;
         
+        
+        yield return new WaitForSeconds(2);
         leveling = false;
         spawner.StartSpawning();
 

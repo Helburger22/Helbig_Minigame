@@ -30,4 +30,9 @@ public class SharkForward : MonoBehaviour
             gameManager.SharkCount();
         }
     }
+
+    public void Deletion()
+    {
+        Destroy(gameObject);
+    }
 }
