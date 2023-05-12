@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     bool leveling;
     private PlayerController playerController;
     public TextMeshProUGUI levelText;
+    public TextMeshProUGUI gameOverScreen;
+    public bool isGameActive;
 
     // Start is called before the first frame update
     void Start()
@@ -69,5 +71,10 @@ public class GameManager : MonoBehaviour
     public void UpdateLevels()
     {
         levelText.text = "Level: " + levels;
+    }
+    public void GameOver()
+    {
+        gameOverScreen.gameObject.SetActive(true);
+        isGameActive = false;
     }
 }
