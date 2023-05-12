@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,8 +10,9 @@ public class PlayerController : MonoBehaviour
     public float speed = 10.0f;
     public float xRange = 10;
     public float zRange = 5;
-    private int health = 3;
+    public int health = 3;
     public Renderer hitscan;
+    public TextMeshProUGUI healthText;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,8 +35,10 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
     }
+
     void OnTriggerEnter(Collider other)
     {
+        //controls health
         health -= 1;
         StartCoroutine(HealthBlink());
         if (health < 1) 
@@ -48,7 +53,7 @@ public class PlayerController : MonoBehaviour
         
 
     }
-
+    //changes color of player during a detection of collision
     IEnumerator HealthBlink()
     {
         //Change to new material
@@ -58,6 +63,15 @@ public class PlayerController : MonoBehaviour
 
         //change back to og material
         hitscan.material.color = Color.white;
+    }
+
+    public void UpdateLives()
+    {
+        healthText.text = "Health: " + health;
+        //if (health < 1)
+        {
+            //gameover.setactive(
+        }
     }
 
 }

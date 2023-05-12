@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,18 +13,23 @@ public class GameManager : MonoBehaviour
     public int sharksRequirement;
     public SharkSpawnManager spawner;
     bool leveling;
+    private PlayerController playerController;
+    public TextMeshProUGUI levelText;
+
     // Start is called before the first frame update
     void Start()
     {
         spawner = GameObject.Find("SharkSpawnManager").GetComponent<SharkSpawnManager>();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        playerController.UpdateLives();
     }
 
+    //controls when 
     public void SharkCount()
     {
         sharkPast++;
@@ -31,6 +39,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //controls levels up, and updates shark changes
      IEnumerator LevelUp()
     {
         leveling = true;
@@ -51,5 +60,11 @@ public class GameManager : MonoBehaviour
         leveling = false;
         spawner.StartSpawning();
 
+    }
+
+    //updates levels UI
+    public void UpdateLevels()
+    {
+        levelText.text = "Health: " + levels;
     }
 }
