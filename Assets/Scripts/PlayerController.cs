@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float xRange = 10;
     public float zRange = 5;
     public int health = 3;
+    public int maxHealth = 3;
     public Renderer hitscan;
     public TextMeshProUGUI healthText;
     // Start is called before the first frame update
@@ -72,6 +73,11 @@ public class PlayerController : MonoBehaviour
         {
             //gameover.setactive(
         }
+    }
+
+    public void ResetLives()
+    {
+        health = maxHealth;
     }
 
 }

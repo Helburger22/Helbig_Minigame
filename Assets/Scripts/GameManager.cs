@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateLevels();
         playerController.UpdateLives();
     }
 
@@ -51,6 +52,8 @@ public class GameManager : MonoBehaviour
         {
             sharks[i].Deletion();
         }
+
+        playerController.ResetLives();
         
         sharksRequirement = sharkPast + sharksRequirement + levels * 5;
         speed = speed + 5;
@@ -65,6 +68,6 @@ public class GameManager : MonoBehaviour
     //updates levels UI
     public void UpdateLevels()
     {
-        levelText.text = "Health: " + levels;
+        levelText.text = "Level: " + levels;
     }
 }
