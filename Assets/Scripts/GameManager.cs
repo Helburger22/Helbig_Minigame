@@ -79,9 +79,10 @@ public class GameManager : MonoBehaviour
         {
             sharks[i].Deletion();
         }
+        playerController.ResetLives();
         playerController.UpdateLives();
 
-        playerController.ResetLives();
+        
         
         sharksRequirement = sharkPast + sharksRequirement + levels * 5;
         speed = speed + 5;

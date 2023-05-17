@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
             if (!powerup)
             {
                 //controls health
-                //health -= 1;
+                health -= 1;
                 UpdateLives();
                 StartCoroutine(HealthBlink());
                 Destroy(other.gameObject);
@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
 
     public void UpdateLives()
     {
-        health -= 1;
+        //health -= 1;
         healthText.text = "Health: " + health;
     }
 
