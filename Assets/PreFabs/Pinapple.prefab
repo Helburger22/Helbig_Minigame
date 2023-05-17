@@ -110,9 +110,10 @@ GameObject:
   - component: {fileID: 5925582989263427510}
   - component: {fileID: 5925582989263427511}
   - component: {fileID: 5925582989263427403}
+  - component: {fileID: 7332078971312120505}
   m_Layer: 0
   m_Name: Pinapple
-  m_TagString: Untagged
+  m_TagString: powerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -205,8 +206,22 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5925582989263427508}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.9153915, y: 2.469778, z: 1}
   m_Center: {x: -0.008863769, y: 0.4133116, z: 0}
+--- !u!114 &7332078971312120505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5925582989263427508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e828ddc7c2d16f4491816e424c5dc74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedMod: 0.66
+  gameManager: {fileID: 0}

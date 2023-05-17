@@ -19,7 +19,7 @@ public class Collisions : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
         
     }
 }

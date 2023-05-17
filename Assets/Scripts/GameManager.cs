@@ -15,21 +15,46 @@ public class GameManager : MonoBehaviour
     bool leveling;
     private PlayerController playerController;
     public TextMeshProUGUI levelText;
-    public TextMeshProUGUI gameOverScreen;
+    public GameObject gameOverScreen;
     public bool isGameActive;
+    public GameObject titleScreen;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        isGameActive = false;
+        
         spawner = GameObject.Find("SharkSpawnManager").GetComponent<SharkSpawnManager>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        
+        //gameOverScreen.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(isGameActive == false)
+        {
+            spawner.StopSpawning();
+        }
+        
         UpdateLevels();
-        playerController.UpdateLives();
+
+        if (Input.anyKey && !isGameActive)
+        {
+            StartGame();
+        }
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            // or if (Input.GetButtonUp("Cancel")) {
+            Application.Quit();
+        }
+        //if (playerController != null)
+        //{
+        //playerController.UpdateLives();
+
+        //}
     }
 
     //controls when 
@@ -54,6 +79,7 @@ public class GameManager : MonoBehaviour
         {
             sharks[i].Deletion();
         }
+        playerController.UpdateLives();
 
         playerController.ResetLives();
         
@@ -72,9 +98,26 @@ public class GameManager : MonoBehaviour
     {
         levelText.text = "Level: " + levels;
     }
+
+    //sets game over canvas to active
     public void GameOver()
     {
-        gameOverScreen.gameObject.SetActive(true);
         isGameActive = false;
+        gameOverScreen.SetActive(true);
+        spawner.StopSpawning();
+        
+        
+    }
+    //resets to the scene
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void StartGame()
+    {
+        isGameActive = true;
+        spawner.StartSpawning();
+        titleScreen.gameObject.SetActive(false);
     }
 }

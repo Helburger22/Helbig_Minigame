@@ -7,17 +7,20 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
     public float horizontalInput;
-    public float speed = 10.0f;
+    public float speed = 8.0f;
     public float xRange = 10;
     public float zRange = 5;
     public int health = 3;
     public int maxHealth = 3;
     public Renderer hitscan;
     public TextMeshProUGUI healthText;
+    private GameManager gameManager;
+    public bool powerup;
+    public Color colorG;
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -39,17 +42,43 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        //controls health
-        health -= 1;
-        StartCoroutine(HealthBlink());
-        if (health < 1) 
+       
+        if (other.CompareTag("shark"))
         {
             
+            if (!powerup)
+            {
+                //controls health
+                //health -= 1;
+                UpdateLives();
+                StartCoroutine(HealthBlink());
+                Destroy(other.gameObject);
+                if (health < 1)
+                {
 
-            
-          Destroy(gameObject);
 
-            
+                    Destroy(gameObject);
+
+                    if (gameManager != null)
+                    {
+                        gameManager.GameOver();
+                    }
+
+
+                }
+            }
+            else
+            {
+                other.gameObject.GetComponentInChildren<Renderer>().material.color = colorG;
+                
+            }
+        }
+        else if (other.CompareTag("powerUp"))
+        {
+            if (powerup == false)
+            {
+                StartCoroutine(PowerBlink());
+            }
         }
         
 
@@ -66,13 +95,26 @@ public class PlayerController : MonoBehaviour
         hitscan.material.color = Color.white;
     }
 
+    IEnumerator PowerBlink()
+    {
+        //Change to new material
+        hitscan.material.color = colorG;
+
+        powerup = true;
+        speed += 5;
+        //wait for seconds
+        yield return new WaitForSeconds(4.0f);
+
+        //change back to og material
+        hitscan.material.color = Color.white;
+        powerup = false;
+        speed -= 5;
+    }
+
     public void UpdateLives()
     {
+        health -= 1;
         healthText.text = "Health: " + health;
-        //if (health < 1)
-        {
-            //gameover.setactive(
-        }
     }
 
     public void ResetLives()
